@@ -54,11 +54,11 @@ public class Operator01 {
 		
 		System.out.println("=========================");
 		// 논리
-		boolean b2 = ( 10 >= 6 ) && ( 10 > 5 );
+		boolean b2 = ( 10 >= 6 ) && ( 10 > 5 ); // and
 		//				 true			true
 		System.out.println(b2);
 		
-		boolean b3 = ( 5 != 1 ) || ( 10 < 4 );
+		boolean b3 = ( 5 != 1 ) || ( 10 < 4 );	// or
 		//				 true		   false
 		System.out.println(b3);
 		
