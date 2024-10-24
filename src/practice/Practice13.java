@@ -131,6 +131,13 @@ public class Practice13 {
 //		}
 //		System.out.println(sum);
 		
+//		int currentSum = 0;
+//		sum = 0;
+//		for(i=1; i<=10; i++) {
+//			currentSum += i;
+//			sum += currentSum;
+//		}
+		
 		
 		System.out.println();
 		
@@ -155,6 +162,15 @@ public class Practice13 {
 		
 		System.out.printf("%d 까지 더했을 때 총합 : %d", number, total);
 		
+//		while(true) {
+//			if
+//			else
+//			
+//			if(total>=100)
+//				break;
+//			
+//			num++;
+//		}
 		
 		
 	}
