@@ -91,7 +91,7 @@ public class Practice15 {
 		String addOrder;
 		String[] menuArr = {"아메리카노", "카페라떼", "바닐라라떼"}; // 메뉴이름
 		int[] priceArr = {3500, 4100, 4300};				// 메뉴가격
-		int[] countArr = new int[menuArr.length];						// 메뉴 주문수량
+		int[] countArr = new int[menuArr.length];			// 메뉴 주문수량
 		
 		while(true) {
 			
