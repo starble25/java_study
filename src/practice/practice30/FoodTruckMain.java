@@ -36,72 +36,32 @@ class FoodTruck {
 	}
 	
 	public void startSales() {
+		isOpened = true;
 		System.out.println("===영업 시작===");
 		
-		while(true) {
-			System.out.println("<1.메뉴보기 2.주문하기 3.재고관리 4.마감하기>");
-			System.out.print("메뉴를 선택하세요:");
-//			int input = scanner.nextInt();
-//			String input = scanner.nextLine();
+		while(isOpened) {
 			
-			int menu = 0;
-			try {
-				menu = scanner.nextInt();
-			} catch (Exception e) {
-				scanner.nextLine();
-				menu = 0;
-			}
-			System.out.println();
-			
-//			int menu;
-//			try {
-//				menu = Integer.parseInt(input);
-//			} catch (Exception e) {
-//				menu = 0;
-//			}
+			int menu = getMainMenu();
 			
 			switch(menu) {
 				case 1: // 1.메뉴보기
-					System.out.println("메뉴 목록");
 					showMenu();
-					System.out.println();System.out.println();
-					continue;
+					break;
 					
 				case 2: // 2.주문하기
-					showMenu();
-					System.out.println();
-					System.out.print("주문할 메뉴를 선택하세요 :");
-					int order = scanner.nextInt();
-//					if(foodList.get(order-1).stock > 0)
-					System.out.println(foodList.get(order-1).foodName + " 주문완료!");
-					foodList.get(order - 1).stock--;			//주문 시 재고 -1개
-					totalSales += foodList.get(order - 1).price;	//매출 증가
-					System.out.println();
-					continue;
+					orderMenu();
+					break;
 					
 				case 3: // 3.재고관리
-					System.out.println("재고관리");
-					System.out.print("재고 추가할 메뉴를 입력하세요:");
-					order = scanner.nextInt();
-					System.out.print("추가할 갯수를 입력하세요:");
-					int amount = scanner.nextInt();
-					foodList.get(order-1).stock += amount;
-					System.out.printf("'%s' 재고 %d개 추가되었습니다. ", foodList.get(order-1).foodName, amount);
-					System.out.printf("현재 재고 :%d개\n", foodList.get(order-1).stock);
-					System.out.println();
-					continue;
+					manageStock();
+					break;
 					
 				case 4: // 4.마감하기
 					System.out.println("마감!");
 					System.out.printf("총 매출: %d원\n", totalSales);
-					break;
+					isOpened = false;
 					
-				default:
-					System.out.println("잘못 입력하셨습니다.");
-					continue;
 			}
-			
-			break;
 		}
 	}
 	
@@ -109,6 +69,85 @@ class FoodTruck {
 		for(int i=0; i<foodList.size(); i++) {
 			System.out.printf("%d.%s(%d개) ", i+1, foodList.get(i).foodName, foodList.get(i).stock);
 		}
+		System.out.println();
+	}
+	
+	int getMainMenu() {
+		
+		int menu = 0;
+		
+		while(true) {
+			System.out.println("<1.메뉴보기 2.주문하기 3.재고관리 4.마감하기>");
+			System.out.print("메뉴를 선택하세요:");
+			
+			try {
+				menu = scanner.nextInt();
+			} catch (Exception e) {
+				scanner.nextLine();
+				menu = 0;
+			}
+			
+			if( menu >=1 && menu <= 4) {
+				break;
+			} else {
+				System.out.println(">>> 보기 중에 선택하세요(1 ~ 4)");
+			}
+			System.out.println();
+		}
+
+		return menu;
+	}
+	
+	void orderMenu() {	//주문하기
+		int menuIndex = getFoodMenuIndex();
+		
+		Food selectedFood = foodList.get(menuIndex);
+		
+		if(selectedFood.stock > 0) {
+			System.out.println(selectedFood.foodName + " 주문완료!");
+			selectedFood.stock--;			//주문 시 재고 -1개
+			totalSales += selectedFood.price;	//매출 증가
+		} else {
+			System.out.println("해당 메뉴는 품절입니다!");
+		}
+		System.out.println();
+	}
+	
+	int getFoodMenuIndex() {	//메뉴의 인덱스 선택
+		int order;
+		
+		while(true) {
+			showMenu();
+			System.out.print(">>> 메뉴를 선택하세요 :");
+			
+			try {
+				order = scanner.nextInt();
+			} catch (Exception e) {
+				scanner.nextLine();
+				order = 0;
+			}
+			
+			if(order >=1 && order <= foodList.size()) {
+				break;
+			} else {
+				System.out.println(">>> 메뉴보기 중에 선택하세요");
+			}
+		}
+		
+		return (order - 1);	//해당 메뉴의 index 반환
+	}
+	
+	void manageStock() {	//재고관리
+		System.out.println("재고관리");
+		int order = getFoodMenuIndex();
+		
+		System.out.print("추가할 갯수를 입력하세요:");
+		int amount = scanner.nextInt();
+		
+		foodList.get(order).stock += amount;
+		System.out.printf("'%s' 재고 %d개 추가되었습니다. ", foodList.get(order).foodName, amount);
+		System.out.printf("현재 재고 :%d개\n", foodList.get(order).stock);
+		System.out.println();
 	}
 	
 }
