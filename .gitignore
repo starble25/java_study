@@ -14,6 +14,9 @@ local.properties
 .loadpath
 .recommenders
 codingtest/
+test/
+test02/
+test03/
 
 # External tool builders
 .externalToolBuilders/
