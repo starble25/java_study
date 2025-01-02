@@ -307,7 +307,7 @@ public class SampleMain {
 		List<Dept> deptList = new ArrayList<Dept>();
 		
 		//쿼리 준비
-		String sqlQuery = "select * from dept";
+		String sqlQuery = "select * from product";
 		try {
 			//쿼리 실행 후 데이터 후속 처리
 			psmt = conn.prepareStatement(sqlQuery);
