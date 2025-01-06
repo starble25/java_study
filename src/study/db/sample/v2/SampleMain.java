@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class SampleMain {
 //		findDeptByDname("SALES");
 //		findDeptByDname("RESEARCH");
 		
+		/*
 		DeptDAO deptDAO = new DeptDAO();
 		
 		int r1 = deptDAO.removeDept(81);
@@ -28,6 +30,20 @@ public class SampleMain {
 		int r2 = deptDAO.removeDept(dd);
 		if(r2 > 0)
 			System.out.println("삭제 잘 됨");
+		
+		Dept changeDept = new Dept(83, "재무팀", "부산");
+		//changeDept.setLoc("울산");
+		
+		Dept changeDept2 = new Dept();
+		changeDept2.setDeptno(83);		//deptno 83인 값을 찾아서
+		changeDept2.setDname("재무팀");	//dname 안 바꿀거면 기존 값
+		changeDept2.setLoc("수원");		//loc를 수원으로 바꾸겠다
+		
+		int r3 = deptDAO.modifyDept(changeDept);
+		if(r3 > 0) {
+			System.out.println("수정이 잘 됐다");
+		}
+		*/
 		
 		/*
 		List<Dept> saveList = new ArrayList<Dept>();
@@ -55,6 +71,7 @@ public class SampleMain {
 //			System.out.println("데이터 저장 성공");
 //		}
 		
+		/*
 		Dept d1 = deptDAO.findDeptByDeptno(30);
 		if(d1 != null) {
 			System.out.println(d1.getDeptno() + " " + d1.getDname() + " " + d1.getLoc());
@@ -73,8 +90,23 @@ public class SampleMain {
 		for(Product p : productList) {
 			System.out.println(p.toString());
 		}
-
+		*/
 		
+		ProfessorDAO professorDAO = new ProfessorDAO();
+		
+		List<ProfessorDTO> pList = professorDAO.findProfessorListByDeptno(101);
+		
+		ProfessorDTO p = pList.get(0);
+		System.out.println(p.getHiredate());
+		
+//		System.out.println(p.getHiredate().getMonthValue());
+//		System.out.println(p.getHiredate().getYear());
+		//1980-06-23
+		
+		LocalDateTime ldt = LocalDateTime.now();
+		System.out.println(ldt);
+		System.out.println(ldt.getYear());
+		System.out.println(ldt.getMonthValue());
 	}
 	
 	
